@@ -666,9 +666,6 @@ def seed_demo_data():
     db.commit()
     return jsonify({'message': 'demo data seeded'})
 
-# Auto-initialize DB on startup
-with app.app_context():
-    init_db()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
