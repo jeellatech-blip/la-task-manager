@@ -32,10 +32,15 @@ def close_db(exception=None):
 
 def init_db():
     db = sqlite3.connect(DB_PATH)
+    db.execute('PRAGMA foreign_keys = ON;')
     with open(SCHEMA_PATH, 'r', encoding='utf-8') as f:
         db.executescript(f.read())
     db.commit()
     db.close()
+
+# Auto-initialize on startup
+with app.app_context():
+    init_db()
 
 
 def rows_to_dict(rows):
